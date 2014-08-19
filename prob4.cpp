@@ -15,56 +15,31 @@ int isPalindrome(string ss)
 	return TRUE;
 }
 
-int isPrime(int number, std::pair<int, int>& factors)
-{
-	int flag = TRUE;
-	for (int i = 2; i < number / 2; ++i)
-	{
-		if (number % i == 0)
-		{
-			factors = std::make_pair(i, (number / i));
-			flag = FALSE; //oops, not prime
-			break;
-		}
-	}
-
-	return flag;
-}
-
-int is3Digit(int number)
-{
-	return ((number > 99) && (number < 1000));
-}
-
 int main(int argc, char** argv)
 {
 	std::cout << "Largest palindrome product" << std::endl;
 	std::cout << "--------------------------" << std::endl;
 
-	int largest3DigitProduct = 999 * 999;
-	int largest2DigitProduct = 99 * 99;
-	int largestPrimeNumber = 0;
-
+	int result = 0;
+	int product = 0;
 	std::pair<int, int> factors;
-	for (int num = largest3DigitProduct; num > largest2DigitProduct; num--)
+	for (int i = 999; i > 99; --i)
 	{
-		string ss(numberToString(num));
-		if (isPalindrome(ss))
+		for (int j = 999; j > 99; --j)
 		{
-			//cout << ss << ':' << num << endl;
-			if (!isPrime(num, factors))
+			product = i * j;
+			if (isPalindrome(numberToString(product)))
 			{
-				if (is3Digit(factors.first) && is3Digit(factors.second))
+				if (product > result)
 				{
-					largestPrimeNumber = num;
-					break;
+					result = product;
+					factors = std::make_pair(i, j);
 				}
 			}
 		}
 	}
 
-
-	std::cout << "Largest palindrome product of two 3 digit numbers is :" << largestPrimeNumber << std::endl;
+	std::cout << "Largest palindrome product of two 3 digit numbers is :" << result << std::endl;
 	std::cout << "The factors are: " << factors.first << ", " << factors.second << endl;
 
 	return 1;

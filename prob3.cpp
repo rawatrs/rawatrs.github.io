@@ -1,25 +1,6 @@
 #include "common.h"
 #include <set>
 
-void getPrimeFactors(long number, std::set<int>& factors)
-{
-	int div = 2;
-	while (number != 0)
-	{
-		if (number % div != 0)
-		{
-			div = div + 1;
-		}
-		else
-		{
-			number = (number / div);
-			factors.insert(div);
-			if (number == 1)
-				break;
-		}
-	}
-}
-
 int main(int argc, char** argv)
 {
 	std::cout << "" << std::endl;
@@ -41,6 +22,7 @@ int main(int argc, char** argv)
 
 	std::set<int> factors;
 	getPrimeFactors(value, factors);
+
 	cout << "Prime factors of the number " << value << " are : " << endl;
 	std::set<int>::iterator it;
 	for (it = factors.begin(); it != factors.end(); it++)
