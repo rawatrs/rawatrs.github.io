@@ -24,8 +24,8 @@ T stringToNumber(const string& text)
 	return ss >> result ? result : 0;
 }
 
-template<typename T>
-void getPrimeFactors(T number, std::set<int>& factors)
+template<typename T, typename S>
+void getPrimeFactors(T number, S& factors)
 {
 	int div = 2;
 	while (number != 0)
@@ -44,3 +44,28 @@ void getPrimeFactors(T number, std::set<int>& factors)
 	}
 }
 
+template<typename T>
+int isPrime(T number)
+{
+	int flag = TRUE;
+	for (T i = 2; i <= (number / 2); ++i)
+	{
+		if (number % i == 0)
+		{
+			flag = FALSE; break;
+		}
+	}
+	return flag;
+}
+
+template<typename T, typename S>
+void getAllPrimeNumbers(T number, S& factors)
+{
+	for (T i = 1; i <= number; ++i)
+	{
+		if (isPrime(i))
+		{
+			factors.insert(i);
+		}
+	}
+}
